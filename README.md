@@ -1,122 +1,165 @@
-# 🎮 GhanaWins
+# GHGameZone
 
-[![Vite](https://img.shields.io/badge/Vite-8.2.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![React](https://img.shields.io/badge/React-19.0.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
-[![React Router](https://img.shields.io/badge/React_Router-7.1.3-CA4245?style=for-the-badge&logo=react-router&logoColor=white)](https://reactrouter.com/)
-[![Sass](https://img.shields.io/badge/Sass-1.83.4-CC6699?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com/)
-[![Oxlint](https://img.shields.io/badge/Oxlint-0_Errors_0_Warnings-00E676?style=for-the-badge)](https://github.com/oxc-project/oxc)
+GHGameZone is a modern gaming portal built as a sleek React + Vite web application. The project is designed to feel like a digital game hub where users can browse games, explore categories, authenticate, and access paid subscription plans for unlimited gameplay.
 
-GhanaWins is a state-of-the-art, high-performance, responsive mini-games gaming web platform built with **React 19**, **Vite 8**, and **Sass**. Designed with a vibrant dark-mode cyberpunk aesthetic, glassmorphism UI elements, neon purple & blue glowing accents, rectangular game banner thumbnails, interactive hero game carousel, category-specific game pages, interactive popup modals, and functional footer policy documents.
+This is not just a simple catalog — it is a more complete gaming experience with a polished landing page, interactive game cards, category pages, user account flow, subscription handling, and an overall app structure that feels close to a real gaming product.
 
----
+## What this project is
 
-## ✨ Features & Pages Overview
+GHGameZone is a front-end game discovery and play platform inspired by online gaming websites. It includes:
 
-### 🏠 1. Home Page (`/`)
-- **Fixed Cyberpunk Navbar**: Top header with logo, navigation links (`HOME`, `GAMES`, `ABOUT US`, `HOW TO PLAY`, `CONTACT`), search bar, and `SIGN IN` auth modal trigger.
-- **Hero Banner & Interactive Carousel**: High-impact promotional hero section with gradient typography (`WELCOME TO GHANA WINS`), badge indicators, quick action buttons linking to `/games` and `/leaderboard`, and an auto-playing featured games carousel showcase with pause-on-hover, prev/next chevron navigation, and pagination dots.
-- **Choose Your Vibe (Categories)**: Multi-column grid featuring 7 category vibes (`ACTION`, `PUZZLE`, `RACING`, `SPORTS`, `ARCADE`, `STRATEGY`, `ADVENTURE`). Clicking any category navigates to dedicated category pages (e.g., `/category/action`).
-- **Rectangular Game Cards (Trending Games)**: Landscape rectangular game card banners (`aspect-ratio: 16/9`) that display game artwork cleanly without clipping.
-- **Interactive Subscription Trigger**: Clicking ANY game card opens the **Subscribe to Play** popup modal (`₹10 FOR 10 TURNS`).
-- **Leaderboard & Advantages**: Top player rankings sidebar and platform advantages section.
-- **Functional Footer**: All quick links, support buttons (`Help Center`, `Terms of Service`, `Privacy Policy`, `Refund Policy`), and social channels are 100% interactive.
+- A stylish home page with hero sections and featured games
+- Game categories for arcade, sports, racing, strategy, puzzle, and action
+- A trending section and leaderboard area
+- Auth flow with login/signup and OTP-style mock verification
+- Subscription plans for daily, weekly, and monthly access
+- A profile screen for user information and account status
+- Policy popup and support-style destinations like About, Contact, and How to Play pages
+- A game launch flow that connects users to embedded game URLs and subscription checks
 
-### 🎯 2. Category Games Pages (`/category/:categorySlug`)
-- **Dedicated Category Hubs**: `/category/action`, `/category/puzzle`, `/category/racing`, `/category/sports`, `/category/arcade`, `/category/strategy`, `/category/adventure`.
-- **Category Meta Header**: Category-specific icon, title, description, and attempts counter widget (`⚡ 42 / 50`).
-- **Category Filter Pills**: Quick switcher to toggle between category vibes seamlessly.
-- **Filtered Game Cards**: Displays all games under that specific category with rectangular banners and subscribe-on-click handlers.
+## What I built
 
-### 🎮 3. Games Catalog (`/games`)
-- **Attempts Counter Card**: Real-time attempt status widget (`⚡ 42 / 50 Attempts Remaining`) with a `BUY MORE ATTEMPTS` trigger.
-- **Search & Filter Controls**: Live search bar with category pills filter (`ALL`, `ACTION`, `PUZZLE`, `RACING`, `SPORTS`, `ARCADE`).
-- **Categorized Game Banners**: 🔥 **Trending Games**, ⭐ **New Releases**, and ⚔️ **Action Games**.
+I built this project as a complete front-end gaming experience with an app architecture that feels production-ready for a demo/product showcase.
 
-### 🏆 4. Leaderboard Page (`/leaderboard`)
-- **Top 3 Podium**: Ranked podium cards for Champion `#1` (Gold 🥇), Runner-Up `#2` (Silver 🥈), and `#3` (Bronze 🥉).
-- **Timeframe Filters**: Daily, Weekly, Monthly, and All-Time filter options.
-- **Full Rankings List**: Detailed player ranks, avatars, win rates, and points.
+### Core work included
 
-### 👤 5. Profile / Account Page (`/profile`)
-- **User Header Card**: Displays User Avatar, Username (`CYBERNINJA`), VIP PRO tag, and quick stats (`⚡ 42 Turns Left`, `#1 Global Rank`, `142 Matches`).
-- **Match History Table**: Match log displaying game name, outcome (`VICTORY` / `DEFEAT`), turns spent, and points earned.
+- React app setup using Vite
+- Responsive layout and reusable UI sections
+- Navigation across multiple pages and sections
+- Game catalog data with categories, ratings, descriptions, and images
+- Authentication and local session management
+- Subscription logic using mock backend storage and date-based expiry checks
+- Token-based access flow for unlimited play
+- Modal-based purchase and signup flows
+- Custom styling using SCSS
+- A clean app structure with reusable components and services
 
-### 📖 6. About Us Page (`/about`)
-- **Hero Header**: `LEVELING UP EVERY GAMING MOMENT` title with subtext and floating 3D neon controller podium graphic.
-- **Our Story & Offer Grids**: Hex portal graphic, What We Offer 4-card grid, Our Values 3-card grid, and stat counters.
+## Main features
 
-### 📜 7. How To Play Page (`/how-to-play`)
-- **Subscription Promo Card**: Highlighted `₹10 FOR 10 TURNS` starter pack card.
-- **How It Works & FAQ Accordion**: 4-step workflow, turns rules, and expandable Q&A accordions.
+### 1. User experience and design
+The interface is built to feel engaging and modern, with bold sections, powerful call-to-action buttons, game tiles, and a layout designed for a gaming audience.
 
-### 📬 8. Contact Us Page (`/contact`)
-- **Interactive Contact Form**: Form with inputs for Name, Email, Subject, Message, and submission confirmation toast.
-- **Contact Cards**: Email, Phone, Socials, and Location (`Noida, Uttar Pradesh, India`).
+### 2. Game discovery
+The app includes a catalog of games with metadata such as:
 
-### ⚡ 9. Interactive Modals
-- **Subscribe Modal (`SubscribeModal.jsx`)**: Triggered when clicking any game card or attempt purchase button.
-- **Auth Modal (`AuthModal.jsx`)**: Sign In, Sign Up, and Google login drawer.
-- **Policy Modal (`PolicyModal.jsx`)**: Displays interactive policy and support documents (`Terms & Conditions`, `Privacy Policy`, `Refund Policy`, `Help Center`) when footer support links are clicked.
+- game title
+- category
+- rating
+- description
+- player count
+- new/trending status
+- image position and thumbnail styling
 
----
+### 3. Authentication flow
+User sign-in and signup flows are implemented through a mock backend system. This includes:
 
-## 🛠️ Technology Stack
+- OTP sending and verification
+- username signup flow
+- session persistence in local storage
+- user restoration on reload
 
-| Technology | Purpose |
-| --- | --- |
-| **React 19** | Core UI component library |
-| **Vite 8** | Next-generation frontend build tool and dev server |
-| **React Router DOM 7** | Client-side application routing |
-| **Sass (SCSS)** | Component-scoped custom CSS & design tokens |
-| **React Icons** | Icon set (FontAwesome, GameIcons, Feather, etc.) |
-| **Oxlint** | High-speed JavaScript & JSX linter |
+### 4. Subscription system
+A real-type subscription model is created for the app, including:
 
----
+- Daily pass
+- Weekly pass
+- Monthly pass
+- validation of subscription expiry
+- unlocking of game access when subscription is active
 
-## 🚀 Getting Started
+### 5. Game launching logic
+The app checks whether the user is logged in and subscribed before launching gameplay. If not, it redirects them to the subscription modal to continue.
 
-### Prerequisites
+## Tech stack
 
-- **Node.js**: v20.19.0+ or v22.12.0+
-- **npm**: v10+
+- React
+- Vite
+- React Router
+- SCSS
+- JavaScript
+- Local mock backend storage with browser localStorage
 
-### Installation
+## Project structure
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/rishi-sr/ghana.git
-   cd ghana
-   ```
+```bash
+ghgamezone/
+├── public/
+│   ├── avatars/
+│   ├── fonts/
+│   └── games/
+├── src/
+│   ├── App.jsx
+│   ├── App.scss
+│   ├── components/
+│   ├── context/
+│   ├── data/
+│   ├── hooks/
+│   ├── Pages/
+│   ├── services/
+│   ├── styles/
+│   └── main.jsx
+├── index.html
+├── package.json
+├── vite.config.js
+├── README.md
+└── public/_redirects
+```
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+## Getting started
 
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-   Open `http://localhost:5173` in your browser.
+### Install dependencies
 
----
+```bash
+npm install
+```
 
-## 📜 Available Scripts
+### Run the app locally
 
-| Script | Description |
-| --- | --- |
-| `npm run dev` | Launches the Vite local dev server with Hot Module Replacement (HMR). |
-| `npm run build` | Compiles an optimized production build into the `dist/` directory. |
-| `npm run preview` | Previews the compiled production build locally. |
-| `npm run lint` | Runs `oxlint` code analysis across all source files. |
+```bash
+npm run dev
+```
 
----
+### Build for production
 
-## 🧪 Verification Status
+```bash
+npm run build
+```
 
-- **Oxlint**: `0 warnings, 0 errors` (Finished in 72ms across 37 files).
-- **Vite Production Build**: `Built cleanly in 2.37s`.
+### Preview the production build
 
----
+```bash
+npm run preview
+```
 
-© 2024 Ghana Wins. All rights reserved.
+### Lint the project
+
+```bash
+npm run lint
+```
+
+## Available scripts
+
+```bash
+npm run dev     # start local development server
+npm run build   # create a production build
+npm run preview # preview the production output
+npm run lint    # run the linter
+```
+
+## Notes about this app
+
+This project is built as a front-end demo/game portal, not a backend-connected production platform. It uses a mock backend layer to simulate authentication and subscription behavior in the browser.
+
+That means the app works well for showcasing:
+
+- UI/UX interaction
+- gaming portal flow
+- subscription logic
+- local state management
+- front-end product design
+
+## Summary
+
+GHGameZone is a gaming website concept that brings together multiple features into one polished app: browsing games, exploring categories, signing in, subscribing, and launching games in a smooth digital experience. This project reflects a lot of front-end work, product thinking, and game portal UX design built into a single cohesive application.
+
+If you want, I can also create a second version of this README in a more professional startup style, a GitHub-style technical README, or a premium portfolio README for showcasing this project.
