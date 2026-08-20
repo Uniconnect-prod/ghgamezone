@@ -1,0 +1,268 @@
+.footer-full-width {
+  width: 100%;
+  margin-top: 40px;
+  box-sizing: border-box;
+
+  .desktop-only {
+    display: flex;
+    @media (max-width: 992px) {
+      display: none !important;
+    }
+  }
+
+  .mobile-only {
+    display: none;
+    @media (max-width: 992px) {
+      display: block !important;
+    }
+  }
+
+  /* MOBILE WHY PLAY HERE SECTION */
+  .mobile-features-section {
+    margin-bottom: 20px;
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+
+      h3 {
+        font-size: 13px;
+        font-weight: 800;
+        color: #e879f9;
+        letter-spacing: 1.5px;
+        font-family: "WinnerSans", sans-serif;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      .title-dash {
+        flex: 1;
+        max-width: 50px;
+        height: 2px;
+        background: linear-gradient(90deg, #d946ef, transparent);
+      }
+    }
+
+    .features-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: rgba(18, 9, 36, 0.7);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      border-radius: 12px;
+
+      .icon-badge {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(147, 51, 234, 0.2);
+        border: 1.5px solid rgba(217, 70, 239, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #e879f9;
+        font-size: 15px;
+      }
+
+      .feature-text {
+        h4 {
+          color: #ffffff;
+          font-size: 12px;
+          font-weight: 800;
+          letter-spacing: 0.8px;
+          font-family: "WinnerSans", sans-serif;
+          margin: 0;
+        }
+
+        p {
+          color: #94a3b8;
+          font-size: 10px;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  /* MAIN FOOTER BAR */
+  .footer-main-bar {
+    width: 100%;
+    background: rgba(18, 9, 36, 0.85);
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    border-radius: 20px;
+    padding: 18px 24px;
+    box-sizing: border-box;
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    @media (max-width: 992px) {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px 16px;
+      gap: 20px;
+    }
+  }
+
+  .footer-left-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: auto;
+
+    .footer-logo {
+      height: 34px;
+      width: auto;
+    }
+
+    .footer-tagline {
+      color: #94a3b8;
+      font-size: 11px;
+      line-height: 1.4;
+      margin: 0;
+    }
+  }
+
+  .footer-nav-columns {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      h4 {
+        color: #d946ef;
+        font-family: "WinnerSans", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        margin: 0 0 4px 0;
+      }
+
+      a, button {
+        color: #cbd5e1;
+        font-size: 11px;
+        text-decoration: none;
+        background: transparent;
+        border: none;
+        text-align: left;
+        cursor: pointer;
+        padding: 0;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: #38bdf8;
+        }
+      }
+    }
+  }
+
+  .footer-social-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    h4 {
+      color: #38bdf8;
+      font-family: "WinnerSans", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin: 0;
+    }
+
+    .social-icons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      a {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        border: 1px solid rgba(217, 70, 239, 0.6);
+        background: rgba(217, 70, 239, 0.1);
+        color: #e879f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        text-decoration: none;
+        transition: all 0.25s ease;
+
+        &:hover {
+          background: #d946ef;
+          color: #ffffff;
+          box-shadow: 0 0 14px rgba(217, 70, 239, 0.6);
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+
+  /* READY TO PLAY CARD IN DESKTOP BAR */
+  .ready-to-play-box {
+    background: rgba(18, 9, 36, 0.6);
+    border: 1px solid rgba(168, 85, 247, 0.45);
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-width: 230px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+
+    &:hover {
+      border-color: #d946ef;
+      box-shadow: 0 0 18px rgba(217, 70, 239, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .ready-text {
+      h4 {
+        font-family: "WinnerSans", sans-serif;
+        font-size: 13px;
+        font-weight: 800;
+        color: #38bdf8;
+        letter-spacing: 1px;
+        margin: 0 0 2px 0;
+      }
+
+      p {
+        color: #94a3b8;
+        font-size: 10px;
+        margin: 0;
+      }
+    }
+
+    .ready-icon {
+      font-size: 28px;
+      color: #d946ef;
+      display: flex;
+      align-items: center;
+      filter: drop-shadow(0 0 8px rgba(217, 70, 239, 0.6));
+    }
+  }
+}
