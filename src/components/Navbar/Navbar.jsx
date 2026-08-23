@@ -140,7 +140,7 @@ const Navbar = ({ onSignInClick, onBuyTokensClick }) => {
           ) : (
             <button className="loginBtn" onClick={onSignInClick}>
               <FaUserAlt />
-              <span>SIGN IN</span>
+              <span>SUBSCRIBE</span>
             </button>
           )}
 
