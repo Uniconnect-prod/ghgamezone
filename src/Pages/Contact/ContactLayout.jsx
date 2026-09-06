@@ -6,9 +6,9 @@ import MobileNav from "../../components/MobileNav/MobileNav";
 const ContactLayout = ({ onSubscribeClick, onAuthClick, onPolicyClick }) => {
   return (
     <div className="contact-layout-wrapper">
-      <Navbar onSignInClick={onAuthClick} onBuyTokensClick={onSubscribeClick} />
+      <Navbar onSubscribeClick={onSubscribeClick || onAuthClick} />
       <ContactContent onSubscribeClick={onSubscribeClick} onPolicyClick={onPolicyClick} />
-      <MobileNav />
+      <MobileNav onSubscribeClick={onSubscribeClick || onAuthClick} />
     </div>
   );
 };

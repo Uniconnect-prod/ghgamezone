@@ -5,15 +5,17 @@ import {
   FaSearch,
   FaUserAlt,
   FaBolt,
+  FaSignOutAlt,
 } from "react-icons/fa";
 import "./Navbar.scss";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.jsx";
 
-const Navbar = ({ onSignInClick, onBuyTokensClick }) => {
+const Navbar = ({ onSubscribeClick, onSignInClick, onBuyTokensClick }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate();
-  const { user, tokens, isLoggedIn, isSubscribed } = useAuth();
+  const { user, isSubscribed, logoutUser } = useAuth();
+
+  const handleSubscribe = onSubscribeClick || onBuyTokensClick || onSignInClick;
 
   return (
     <nav className="navbar">
@@ -114,51 +116,70 @@ const Navbar = ({ onSignInClick, onBuyTokensClick }) => {
             <FaSearch />
           </div>
 
-          {isLoggedIn ? (
+          {isSubscribed ? (
             <div className="auth-user-section">
               <div
-                className={`token-pill-nav ${isSubscribed ? "subscribed" : ""}`}
-                title={isSubscribed ? "Active Unlimited Pass (Click to view Profile)" : "Get Subscription Pass"}
-                onClick={isSubscribed ? () => navigate("/profile") : onBuyTokensClick}
+                className="token-pill-nav subscribed"
+                title="Active Unlimited Pass (Click to Extend)"
+                onClick={handleSubscribe}
               >
                 <FaBolt className="bolt" />
-                <span className="token-count">{isSubscribed ? "UNLIMITED" : "GET PASS"}</span>
-                <span className="token-label">{isSubscribed ? "PASS" : "1 GHS"}</span>
+                <span className="token-count">VIP PASS</span>
+                <span className="token-label">ACTIVE</span>
               </div>
 
               <div className="user-profile-menu">
-                <button
-                  className="user-profile-btn"
-                  onClick={() => navigate("/profile")}
-                  title="View Profile"
+                <div
+                  className="user-phone-tag"
+                  title={user?.phoneNumber || user?.username || "Active Subscriber"}
                 >
                   <FaUserAlt />
-                  <span className="username">{user?.username || "GAMER"}</span>
+                  <span className="username">
+                    {user?.phoneNumber
+                      ? `+233 ${user.phoneNumber.replace(/^\+?233/, "")}`
+                      : user?.username || "VIP"}
+                  </span>
+                </div>
+                <button
+                  className="logout-nav-btn"
+                  onClick={logoutUser}
+                  title="Sign Out"
+                >
+                  <FaSignOutAlt />
                 </button>
               </div>
             </div>
           ) : (
-            <button className="loginBtn" onClick={onSignInClick}>
-              <FaUserAlt />
+            <button className="loginBtn subscribe-cta-btn" onClick={handleSubscribe}>
+              <FaBolt />
               <span>SUBSCRIBE</span>
             </button>
           )}
 
           <div className="mobileHeaderIcons">
-            {isLoggedIn && (
-              <div className="mobile-token-badge" onClick={isSubscribed ? () => navigate("/profile") : (onBuyTokensClick || (() => navigate("/profile")))}>
-                <FaBolt />
-                <span>{isSubscribed ? "VIP" : "PASS"}</span>
-              </div>
-            )}
-            {isLoggedIn ? (
-              <div className="icon-btn profile-icon" onClick={() => navigate("/profile")} title="Profile">
-                <FaUserAlt />
-              </div>
+            {isSubscribed ? (
+              <>
+                <div
+                  className="mobile-token-badge"
+                  onClick={handleSubscribe}
+                  title="VIP Pass Active (Click to extend)"
+                >
+                  <FaBolt />
+                  <span>VIP</span>
+                </div>
+                <div
+                  className="icon-btn logout-icon"
+                  onClick={logoutUser}
+                  title="Sign Out"
+                >
+                  <FaSignOutAlt />
+                </div>
+              </>
             ) : (
-              <div className="icon-btn" onClick={onSignInClick} title="Sign In">
-                <FaUserAlt />
-              </div>
+              <button className="mobile-subscribe-btn" onClick={handleSubscribe}>
+                <FaBolt />
+                <span>SUBSCRIBE</span>
+              </button>
             )}
           </div>
         </div>

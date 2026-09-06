@@ -6,9 +6,9 @@ import MobileNav from "../../components/MobileNav/MobileNav";
 const LeaderboardLayout = ({ onSubscribeClick, onAuthClick, onPolicyClick }) => {
   return (
     <div className="leaderboard-layout-wrapper">
-      <Navbar onSignInClick={onAuthClick} onBuyTokensClick={onSubscribeClick} />
+      <Navbar onSubscribeClick={onSubscribeClick || onAuthClick} />
       <LeaderboardContent onSubscribeClick={onSubscribeClick} onPolicyClick={onPolicyClick} />
-      <MobileNav />
+      <MobileNav onSubscribeClick={onSubscribeClick || onAuthClick} />
     </div>
   );
 };

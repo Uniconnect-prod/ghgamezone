@@ -6,13 +6,13 @@ import MobileNav from "../../components/MobileNav/MobileNav";
 const CategoryGamesLayout = ({ onGameClick, onSubscribeClick, onAuthClick, onFooterPolicyClick }) => {
   return (
     <div className="category-games-layout-wrapper">
-      <Navbar onSignInClick={onAuthClick} onBuyTokensClick={onSubscribeClick} />
+      <Navbar onSubscribeClick={onSubscribeClick || onAuthClick} />
       <CategoryGamesContent
         onGameClick={onGameClick}
         onSubscribeClick={onSubscribeClick}
         onFooterPolicyClick={onFooterPolicyClick}
       />
-      <MobileNav />
+      <MobileNav onSubscribeClick={onSubscribeClick || onAuthClick} />
     </div>
   );
 };

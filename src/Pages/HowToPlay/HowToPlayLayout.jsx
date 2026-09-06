@@ -6,9 +6,9 @@ import MobileNav from "../../components/MobileNav/MobileNav";
 const HowToPlayLayout = ({ onSubscribeClick, onAuthClick, onPolicyClick }) => {
   return (
     <div className="how-to-play-layout-wrapper">
-      <Navbar onSignInClick={onAuthClick} onBuyTokensClick={onSubscribeClick} />
+      <Navbar onSubscribeClick={onSubscribeClick || onAuthClick} />
       <HowToPlayContent onSubscribeClick={onSubscribeClick} onPolicyClick={onPolicyClick} />
-      <MobileNav />
+      <MobileNav onSubscribeClick={onSubscribeClick || onAuthClick} />
     </div>
   );
 };

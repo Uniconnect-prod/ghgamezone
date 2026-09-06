@@ -3,10 +3,13 @@ import { NavLink } from "react-router-dom";
 import { GoHome } from "react-icons/go";
 import { IoGameControllerOutline } from "react-icons/io5";
 import { GoTrophy } from "react-icons/go";
-import { FiUser } from "react-icons/fi";
+import { FaBolt } from "react-icons/fa";
+import { useAuth } from "../../context/AuthContext.jsx";
 import "./MobileNav.scss";
 
-const MobileNav = () => {
+const MobileNav = ({ onSubscribeClick }) => {
+  const { isSubscribed } = useAuth();
+
   return (
     <nav className="mobile-bottom-nav">
       <NavLink
@@ -30,7 +33,7 @@ const MobileNav = () => {
         <span>GAMES</span>
       </NavLink>
 
-      <div className="nav-item center-hex-wrapper">
+      <div className="nav-item center-hex-wrapper" onClick={onSubscribeClick}>
         <div className="hex-button">
           <svg viewBox="0 0 100 100" className="hex-svg">
             <polygon
@@ -63,15 +66,14 @@ const MobileNav = () => {
         <span>LEADERBOARD</span>
       </NavLink>
 
-      <NavLink
-        to="/profile"
-        className={({ isActive }) =>
-          `nav-item ${isActive ? "active" : ""}`
-        }
+      <button
+        type="button"
+        className={`nav-item nav-btn-item ${isSubscribed ? "subscribed" : ""}`}
+        onClick={onSubscribeClick}
       >
-        <FiUser className="nav-icon" />
-        <span>PROFILE</span>
-      </NavLink>
+        <FaBolt className="nav-icon" />
+        <span>{isSubscribed ? "VIP PASS" : "SUBSCRIBE"}</span>
+      </button>
     </nav>
   );
 };

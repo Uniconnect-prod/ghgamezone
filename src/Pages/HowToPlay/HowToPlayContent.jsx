@@ -51,11 +51,11 @@ const faqData = [
   },
   {
     q: "How many game attempts do I get?",
-    a: "You get unlimited attempts while your subscription is active! A live validity timer in your profile shows remaining active time.",
+    a: "You get unlimited attempts while your subscription is active! Your VIP Pass status and unlimited gaming access are activated immediately upon subscription.",
   },
   {
-    q: "How do I log in?",
-    a: "Simply enter your MTN mobile number to receive a 4-digit SMS OTP code for instant, secure authentication.",
+    q: "How do I subscribe and start playing?",
+    a: "Click Subscribe, enter your MTN mobile number, select your preferred pass (Daily, Weekly, or Monthly), and the system activates your unlimited access instantly.",
   },
   {
     q: "How are winners selected?",

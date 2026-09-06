@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Games from "./Pages/Games/Games";
 import CategoryGames from "./Pages/CategoryGames/CategoryGames";
@@ -7,9 +7,7 @@ import About from "./Pages/About/About";
 import HowToPlay from "./Pages/HowToPlay/HowToPlay";
 import Contact from "./Pages/Contact/Contact";
 import Leaderboard from "./Pages/Leaderboard/Leaderboard";
-import Profile from "./Pages/Profile/Profile";
 import SubscribeModal from "./components/SubscribeModal/SubscribeModal";
-import AuthModal from "./components/AuthModal/AuthModal";
 import PolicyModal from "./components/PolicyModal/PolicyModal";
 import GameModal from "./components/GameModal/GameModal";
 import { getGameByTitleOrSlug } from "./data/gamesCatalog";
@@ -18,10 +16,9 @@ import { deductToken } from "./services/tokenService.js";
 import "./App.scss";
 
 function App() {
-  const { user, tokens, isLoggedIn, isSubscribed, subscription, logoutUser, updateTokens, updateSubscription } = useAuth();
+  const { tokens, isLoggedIn, isSubscribed } = useAuth();
 
   const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isPolicyOpen, setIsPolicyOpen] = useState(false);
   const [isGameOpen, setIsGameOpen] = useState(false);
   
@@ -62,7 +59,7 @@ function App() {
 
     try {
       isDeductingRef.current = true;
-      const result = await deductToken();
+      await deductToken();
 
       setActiveGameObj(targetGame);
       setIsGameOpen(true);
@@ -77,13 +74,9 @@ function App() {
     }
   }, [isLoggedIn, isSubscribed, showToast]);
 
-  const handleBuyAttemptsClick = () => {
+  const handleSubscribeClick = () => {
     setSelectedGameTitle("");
     setIsSubscribeOpen(true);
-  };
-
-  const handleAuthClick = () => {
-    setIsAuthOpen(true);
   };
 
   const handlePolicyClick = (type) => {
@@ -91,11 +84,11 @@ function App() {
     setIsPolicyOpen(true);
   };
 
-  // Called after payment confirmed and subscription activated in database
-  const handleSubscribeSuccess = (planName, newSub) => {
+  // Called after payment confirmed and subscription activated in database/API
+  const handleSubscribeSuccess = (planName) => {
     showToast(`🎉 Successfully Subscribed to ${planName || "GHGameZone"}! Unlimited Play Active.`);
     
-    // If user clicked a game before buying subscription, launch it automatically
+    // If user clicked a game before subscribing, launch it automatically
     if (pendingGameObj) {
       const g = pendingGameObj;
       setPendingGameObj(null);
@@ -103,23 +96,6 @@ function App() {
         handleGameClick(g);
       }, 500);
     }
-  };
-
-  // Called after user logs in or signs up
-  const handleLoginSuccess = (username) => {
-    showToast(`👋 Welcome to GHGameZone, ${username}!`);
-    if (pendingGameObj) {
-      const g = pendingGameObj;
-      setPendingGameObj(null);
-      setTimeout(() => {
-        handleGameClick(g);
-      }, 500);
-    }
-  };
-
-  const handleLogout = async () => {
-    await logoutUser();
-    showToast("Signed out successfully.");
   };
 
   return (
@@ -136,8 +112,8 @@ function App() {
           element={
             <Home
               onGameClick={handleGameClick}
-              onSubscribeClick={handleBuyAttemptsClick}
-              onAuthClick={handleAuthClick}
+              onSubscribeClick={handleSubscribeClick}
+              onAuthClick={handleSubscribeClick}
               onPolicyClick={handlePolicyClick}
             />
           }
@@ -147,8 +123,8 @@ function App() {
           element={
             <Games
               onGameClick={handleGameClick}
-              onBuyAttemptsClick={handleBuyAttemptsClick}
-              onAuthClick={handleAuthClick}
+              onBuyAttemptsClick={handleSubscribeClick}
+              onAuthClick={handleSubscribeClick}
             />
           }
         />
@@ -157,8 +133,8 @@ function App() {
           element={
             <CategoryGames
               onGameClick={handleGameClick}
-              onSubscribeClick={handleBuyAttemptsClick}
-              onAuthClick={handleAuthClick}
+              onSubscribeClick={handleSubscribeClick}
+              onAuthClick={handleSubscribeClick}
               onFooterPolicyClick={handlePolicyClick}
             />
           }
@@ -167,8 +143,8 @@ function App() {
           path="/about"
           element={
             <About
-              onSubscribeClick={handleBuyAttemptsClick}
-              onAuthClick={handleAuthClick}
+              onSubscribeClick={handleSubscribeClick}
+              onAuthClick={handleSubscribeClick}
               onPolicyClick={handlePolicyClick}
             />
           }
@@ -177,8 +153,8 @@ function App() {
           path="/how-to-play"
           element={
             <HowToPlay
-              onSubscribeClick={handleBuyAttemptsClick}
-              onAuthClick={handleAuthClick}
+              onSubscribeClick={handleSubscribeClick}
+              onAuthClick={handleSubscribeClick}
               onPolicyClick={handlePolicyClick}
             />
           }
@@ -187,8 +163,8 @@ function App() {
           path="/contact"
           element={
             <Contact
-              onSubscribeClick={handleBuyAttemptsClick}
-              onAuthClick={handleAuthClick}
+              onSubscribeClick={handleSubscribeClick}
+              onAuthClick={handleSubscribeClick}
               onPolicyClick={handlePolicyClick}
             />
           }
@@ -197,24 +173,14 @@ function App() {
           path="/leaderboard"
           element={
             <Leaderboard
-              onSubscribeClick={handleBuyAttemptsClick}
-              onAuthClick={handleAuthClick}
+              onSubscribeClick={handleSubscribeClick}
+              onAuthClick={handleSubscribeClick}
               onPolicyClick={handlePolicyClick}
             />
           }
         />
-        <Route
-          path="/profile"
-          element={
-            <Profile
-              user={user?.username || (typeof user === "string" ? user : null)}
-              onSubscribeClick={handleBuyAttemptsClick}
-              onLogout={handleLogout}
-              onAuthClick={handleAuthClick}
-              onPolicyClick={handlePolicyClick}
-            />
-          }
-        />
+        {/* Redirect any legacy /profile access to home */}
+        <Route path="/profile" element={<Navigate to="/" replace />} />
       </Routes>
 
       {/* POPUP MODALS */}
@@ -243,15 +209,6 @@ function App() {
         }}
         gameTitle={selectedGameTitle}
         onSubscribeSuccess={handleSubscribeSuccess}
-      />
-
-      <AuthModal
-        isOpen={isAuthOpen}
-        onClose={() => {
-          setIsAuthOpen(false);
-          setPendingGameObj(null);
-        }}
-        onLoginSuccess={handleLoginSuccess}
       />
 
       <PolicyModal

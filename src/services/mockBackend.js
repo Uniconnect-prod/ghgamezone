@@ -269,6 +269,87 @@ export const mockBackend = {
   },
 
   // 3. Subscription & Duration Management
+  subscribeWithPhone: async (phoneNumber, packageId, paymentId = `pay_${Date.now()}`) => {
+    await new Promise((r) => setTimeout(r, 250));
+    const cleanNum = phoneNumber.trim().replace(/\s+/g, "").replace(/^0/, "").replace(/^\+?233/, "");
+    if (!cleanNum || cleanNum.length < 8) {
+      throw new Error("Please enter a valid MTN Ghana mobile number");
+    }
+
+    const fullPhone = `+233${cleanNum}`;
+    const email = `${cleanNum}@ghgamezone.com`;
+    const users = getInitialUsers();
+    let userIndex = users.findIndex(
+      (u) => u.phoneNumber === fullPhone || u.email.toLowerCase() === email.toLowerCase()
+    );
+
+    if (userIndex === -1) {
+      const newUser = {
+        id: `usr_${Date.now()}`,
+        username: `Gamer_${cleanNum.slice(-4)}`,
+        phoneNumber: fullPhone,
+        email: email.toLowerCase(),
+        password: "mtn_pass_auto",
+        tokens: 999,
+        maxTokens: 100,
+        createdAt: new Date().toISOString(),
+        role: "VIP PRO",
+        avatar: "/avatars/avatar.png",
+        subscription: null,
+      };
+      users.push(newUser);
+      userIndex = users.length - 1;
+    }
+
+    const pkg = SUBSCRIPTION_PACKAGES.find((p) => p.id === packageId) || SUBSCRIPTION_PACKAGES[0];
+    const now = Date.now();
+
+    let baseTime = now;
+    if (
+      users[userIndex].subscription &&
+      users[userIndex].subscription.active &&
+      new Date(users[userIndex].subscription.expiresAt).getTime() > now
+    ) {
+      baseTime = new Date(users[userIndex].subscription.expiresAt).getTime();
+    }
+
+    const expiresAt = new Date(baseTime + pkg.durationMs).toISOString();
+
+    const newSubscription = {
+      active: true,
+      planId: pkg.id,
+      planName: pkg.name,
+      label: pkg.label,
+      price: pkg.price,
+      currency: pkg.currency,
+      durationHours: pkg.durationHours,
+      durationLabel: pkg.durationLabel,
+      activatedAt: new Date().toISOString(),
+      expiresAt: expiresAt,
+      paymentRef: paymentId,
+    };
+
+    users[userIndex].subscription = newSubscription;
+    users[userIndex].tokens = 999; // Unlimited access
+    saveUsers(users);
+
+    const token = `mock_jwt_${users[userIndex].id}_${Date.now()}`;
+    localStorage.setItem(
+      STORAGE_KEY_SESSION,
+      JSON.stringify({ user: users[userIndex], token })
+    );
+
+    return {
+      success: true,
+      user: users[userIndex],
+      token,
+      subscription: newSubscription,
+      tokens: 999,
+      package: pkg,
+      message: `🎉 Successfully subscribed to ${pkg.name}! Enjoy unlimited gaming.`,
+    };
+  },
+
   subscribeUser: async (packageId, paymentId = `pay_${Date.now()}`) => {
     await new Promise((r) => setTimeout(r, 200));
     const sessionStr = localStorage.getItem(STORAGE_KEY_SESSION);

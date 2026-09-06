@@ -1,8 +1,33 @@
-import { authFetch } from "./api.js";
+import { authFetch, publicFetch, setToken } from "./api.js";
 import { SUBSCRIPTION_PACKAGES as BACKEND_PACKAGES, mockBackend } from "./mockBackend.js";
 
 export const SUBSCRIPTION_PACKAGES = BACKEND_PACKAGES;
 export const TOKEN_PACKAGES = SUBSCRIPTION_PACKAGES; // Backward compatibility alias
+
+export const subscribeWithPhone = async ({ phoneNumber, packageId }) => {
+  const selectedPkg = SUBSCRIPTION_PACKAGES.find((p) => p.id === packageId) || SUBSCRIPTION_PACKAGES[0];
+  try {
+    const data = await publicFetch("/subscription/subscribe", {
+      method: "POST",
+      body: JSON.stringify({
+        phoneNumber,
+        packageId: selectedPkg.id,
+      }),
+    });
+    if (data?.subscription && data?.token) {
+      setToken(data.token);
+      return data;
+    }
+  } catch {
+    // fallback to mock backend
+  }
+
+  const result = await mockBackend.subscribeWithPhone(phoneNumber, selectedPkg.id);
+  if (result?.token) {
+    setToken(result.token);
+  }
+  return result;
+};
 
 export const getTokenPackages = async () => {
   try {
